@@ -12,9 +12,7 @@ super(props);
             }}
         >
             {this.props.value}
-        </button>
-
-        
+        </button>       
 
       
     );
@@ -30,14 +28,12 @@ class Tablica extends React.Component {
   return this.props.kwadraty.map((arrayElement, index) => {
      const strzalkaKwadratFunction = () => this.props.handleKwadratClick(index);
      
-    
-    
-    return(
+     return(
      <Kwadrat
       key={index}
       onClick={strzalkaKwadratFunction}
       value={arrayElement}
-      />
+       />
       );
      });
     }
@@ -49,7 +45,7 @@ class Tablica extends React.Component {
  this.state = {
     kwadraty: Array(9).fill(null),
     nastepnySymbol: "O",
- };
+   };
  this.handleKwadratClick=this.handleKwadratClick.bind(this);
  }
  handleKwadratClick(index) {
@@ -69,6 +65,6 @@ class Tablica extends React.Component {
         handleKwadratClick={this.handleKwadratClick}
         />
     );
- }
+  }
 }
 ReactDOM.render(<Gra />, document.getElementById("root"));
