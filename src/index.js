@@ -1,16 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM, { render } from "react-dom";
 
 class Kwadrat extends React.Component {
 constructor(props) {
 super(props);
  }
-render(){
+ render(){
     return(
         <button onClick = {() => {
             this.props.onClick();
             }}
         >
+            {this.props.value}
         </button>
 
         
@@ -22,35 +23,36 @@ render(){
 
 }
 class Tablica extends React.Component {
-constructor(props) {
-super(props);
+ constructor(props) {
+  super(props);
  }
  render() {
- return(
-     this.props.kwadraty.map((arrayElement, index)) => {
+  return this.props.kwadraty.map((arrayElement, index) => {
+     const strzalkaKwadratFunction = () => this.props.handleKwadratClick(index);
      
-    }
-    );
+    
+    
     return(
-    <Kwadrat
-    key={index}
-    />
-    );
-
-
-}
-}
-class Gra extends React.Component {
-constructor(props) {
+     <Kwadrat
+      key={index}
+      onClick={strzalkaKwadratFunction}
+      value={arrayElement}
+      />
+      );
+     });
+    }
+  }
+ class Gra extends React.Component {
+ constructor(props) {
     super(props);
- }
-this.state = {
+ 
+ this.state = {
     kwadraty: Array(9).fill(null),
-    nastepnySymbol: "X",
+    nastepnySymbol: "O",
  };
-this.handleKwadratClick=this.handleKwadratClick.bind(this);
-}
-handleKwadratClick(index) {
+ this.handleKwadratClick=this.handleKwadratClick.bind(this);
+ }
+ handleKwadratClick(index) {
     console.log(`User click ${index}`);
     const stateKwadraty = this.state.kwadraty;
      stateKwadraty [index] = this.state.nastepnySymbol;
@@ -58,9 +60,15 @@ handleKwadratClick(index) {
 
    this.setState({ kwadraty : stateKwadraty, nastepnySymbol : nastepnySymbol });
 
+ }
 
-
-
-
-
+ render(){
+    return(
+        <Tablica
+        kwadraty={this.state.kwadraty}
+        handleKwadratClick={this.handleKwadratClick}
+        />
+    );
+ }
 }
+ReactDOM.render(<Gra />, document.getElementById("root"));
