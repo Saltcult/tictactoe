@@ -33,12 +33,14 @@ class Tablica extends React.Component {
      <Kwadrat
       key={index}
       onClick={strzalkaKwadratFunction}
-      value={arrayElement}
-       />
+      value={arrayElement} />
+       {(index) + 1} % 3 === 0 ? <br /> : <></>}
+
       );
-     });
-    }
+    )};
   }
+
+  
  class Gra extends React.Component {
  constructor(props) {
     super(props);
@@ -46,9 +48,14 @@ class Tablica extends React.Component {
  this.state = {
     kwadraty: Array(9).fill(null),
     nastepnySymbol: "O",
+
+
+
+    
    };
  this.handleKwadratClick=this.handleKwadratClick.bind(this);
  }
+
  handleKwadratClick(index) {
     console.log(`User click ${index}`);
     const stateKwadraty = this.state.kwadraty;
@@ -67,5 +74,34 @@ class Tablica extends React.Component {
         />
     );
   }
+
+  winCheck(kwadraty){
+    const winCondition = [
+      [0,1,2]
+      [3,4,5]
+      [6,7,8]
+      [0,3,6]
+      [1,4,7]
+      [2,5,8]
+      [0,4,8]
+      [2,4,6]
+     ];
+     for (let e = 0; e <winCondition.length; e++ ) {
+     let [a, b, c] = winCondition[e];
+     
+     if (
+       (kwadraty === "X" || kwadraty === "O") &&
+       kwadraty[a] === kwadraty[b] &&
+       kwadraty[a] === kwadraty[c]
+      )
+      return winCondition[e]
+    }
+
+
+  }
+
+  }
+  this
 }
+
 ReactDOM.render(<Gra />, document.getElementById("root"));
